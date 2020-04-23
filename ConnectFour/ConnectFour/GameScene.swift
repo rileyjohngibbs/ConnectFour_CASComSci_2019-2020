@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var turnLabel: SKLabelNode!
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -70,5 +71,11 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        turnLabel = SKLabelNode(fontNamed: "ArialRoundedMTBold")
+        turnLabel.zPosition = 1
+        turnLabel.position = CGPoint(x: 0, y: height / 2 + 180)
+        turnLabel.text = "Red Player's turn"
+        turnLabel.fontColor = SKColor.green
+        addChild(turnLabel)
     }
 }
