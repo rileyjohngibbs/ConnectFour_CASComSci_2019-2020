@@ -10,6 +10,8 @@ import SpriteKit
 
 class Board {
     
+//    var restartGame = false
+    
     enum Chip {
         case red
         case black
@@ -48,7 +50,13 @@ class Board {
                 node.fillColor = color
             }
         }
+        
+//        func delete() {
+//            restartGame = true
+//        }
+
     }
+        
     
     let NUM_COLUMNS = 7
     let NUM_ROWS = 6
@@ -74,6 +82,21 @@ class Board {
     }
     
     func dropChip(in column: Column) {
+//        TRYING TO RESET GAME BOARD
+//        if restartGame == false {
+//            for cell in column.cells {
+//                if cell.chip == .empty {
+//                    cell.chip = playerTurn
+//                    passTurn()
+//                    break
+//                }
+//            }
+//        } else if restartGame == true {
+//            for cell in column.cells {
+//                if cell.chip = .empty
+//                restartGame = false
+//            }
+//        }
         for cell in column.cells {
             if cell.chip == .empty {
                 cell.chip = playerTurn

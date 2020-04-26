@@ -13,6 +13,9 @@ class GameScene: SKScene {
     
     var board: Board!
     var turnLabel: SKLabelNode!
+    var whosTurn: String = "Red"
+//    var restartGameButton: SKShapeNode!
+    var restartBoardTest: Int = 1
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -28,6 +31,7 @@ class GameScene: SKScene {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
                         board.updateDisplay()
+                        changeTurnLabel()
                     }
                 }
             }
@@ -73,9 +77,32 @@ class GameScene: SKScene {
         }
         turnLabel = SKLabelNode(fontNamed: "ArialRoundMTBold")
         turnLabel.zPosition = 1
-        turnLabel.position = CGPoint(x: 0, y: height / 2 + 100)
-        turnLabel.text = "Red Player's Turn"
+        turnLabel.position = CGPoint(x: 0, y: height / 2 + 170)
+        turnLabel.text = "\(whosTurn)'s Turn"
         turnLabel.fontColor = SKColor.red
         self.addChild(turnLabel)
+        
+        
+    }
+    
+    func changeTurnLabel() {
+        if whosTurn == "Red" {
+            whosTurn = "Black"
+            turnLabel.fontColor = SKColor.white
+        } else if whosTurn == "Black" {
+            whosTurn = "Red"
+            turnLabel.fontColor = SKColor.red
+        }
+        turnLabel.text = "\(whosTurn)'s Turn"
+//        restartBoardTest += 1
+//        print("\(restartBoardTest) first")
+//        if restartBoardTest == 3 {
+//            for col in board.columns {
+//                for cell in col.cells {
+//                    cell.delete()
+//                    print("\(restartBoardTest) second")
+//                }
+//            }
+//        }
     }
 }
