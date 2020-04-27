@@ -21,7 +21,6 @@ class GameScene: SKScene {
     }
     
     private func restartGame() {
-        tearDownBoard()
         board = Board()
         createBoard()
     }
@@ -91,17 +90,5 @@ class GameScene: SKScene {
             y = height / -2 + cellWidth / 2
         }
     }
-    
-    private func tearDownBoard() {
-        for col in board.columns {
-            if let dropper = col.dropper {
-                dropper.removeFromParent()
-            }
-            for cell in col.cells {
-                if let node = cell.node {
-                    node.removeFromParent()
-                }
-            }
-        }
-    }
+
 }
