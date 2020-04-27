@@ -81,6 +81,16 @@ class Board {
         }
     }
     
+    func resetBoard(){
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
+        }
+        self.updateDisplay()
+        playerTurn = .red
+    }
+    
     func dropChip(in column: Column) {
 //        TRYING TO RESET GAME BOARD
 //        if restartGame == false {

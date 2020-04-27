@@ -14,8 +14,7 @@ class GameScene: SKScene {
     var board: Board!
     var turnLabel: SKLabelNode!
     var whosTurn: String = "Red"
-//    var restartGameButton: SKShapeNode!
-    var restartBoardTest: Int = 1
+    var resetButton: SKShapeNode!
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -33,6 +32,9 @@ class GameScene: SKScene {
                         board.updateDisplay()
                         changeTurnLabel()
                     }
+                    if let button = self.resetButton, button == touchedNode {
+                        board.resetBoard()
+                    }
                 }
             }
         }
@@ -41,6 +43,10 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+    
+//    private func creatResetBtn(x: CGFloat, y: CGFloat, cellWidth: CGFloat) {
+//
+//    }
     
     private func createBoard() {
         let width: CGFloat = frame.size.width * 7 / 9
@@ -75,6 +81,21 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        let button = SKShapeNode()
+       button.zPosition = 5
+       button.position = CGPoint(x: x, y: y + cellWidth)
+       button.fillColor = SKColor.purple
+       let path = CGMutablePath()
+       path.addLines(between: [
+            CGPoint(x: -cellWidth / 2 - 80, y: cellWidth / 2 - 190),
+            CGPoint(x: cellWidth / 2 - 100, y: cellWidth / 2 - 190),
+            CGPoint(x: cellWidth / 2 - 100, y: -cellWidth / 2 - 170),
+            CGPoint(x: -cellWidth / 2 - 80, y: -cellWidth / 2 - 170)
+       ])
+       button.path = path
+        self.resetButton = button
+       addChild(button)
+
         turnLabel = SKLabelNode(fontNamed: "ArialRoundMTBold")
         turnLabel.zPosition = 1
         turnLabel.position = CGPoint(x: 0, y: height / 2 + 170)
@@ -94,15 +115,5 @@ class GameScene: SKScene {
             turnLabel.fontColor = SKColor.red
         }
         turnLabel.text = "\(whosTurn)'s Turn"
-//        restartBoardTest += 1
-//        print("\(restartBoardTest) first")
-//        if restartBoardTest == 3 {
-//            for col in board.columns {
-//                for cell in col.cells {
-//                    cell.delete()
-//                    print("\(restartBoardTest) second")
-//                }
-//            }
-//        }
     }
 }
