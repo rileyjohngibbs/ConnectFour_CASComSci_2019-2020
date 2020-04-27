@@ -9,14 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+ class GameScene: SKScene {
     
     var board: Board!
+    var resetbutton: SKShapeNode!
 
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
-    }
+   }
+   
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -27,6 +30,9 @@ class GameScene: SKScene {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
                         board.updateDisplay()
+                    }
+                    if let button = self.resetbutton, button == touchedNode {
+                        board.resetBoard()
                     }
                 }
             }
@@ -70,5 +76,19 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        let button = SKShapeNode()
+        button.zPosition = 5
+        button.position = CGPoint(x: x, y: y + cellWidth)
+        button.fillColor = SKColor.green
+        let path = CGMutablePath()
+        path.addLines(between: [
+             CGPoint(x: -cellWidth / 2 - 335, y: cellWidth / 2 - 400),
+             CGPoint(x: cellWidth / 2 - 335, y: cellWidth / 2 - 400),
+             CGPoint(x: cellWidth / 2 - 335, y: -cellWidth / 2 - 280),
+             CGPoint(x: -cellWidth / 2 - 335, y: -cellWidth / 2 - 280)
+        ])
+        button.path = path
+         self.resetbutton = button
+        addChild(button)
     }
 }
