@@ -15,6 +15,7 @@ class GameScene: SKScene {
     var turnLabel: SKLabelNode!
     var whosTurn: String = "Red"
     var resetButton: SKShapeNode!
+    var resetLabel: SKLabelNode!
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -82,15 +83,15 @@ class GameScene: SKScene {
             y = height / -2 + cellWidth / 2
         }
         let button = SKShapeNode()
-       button.zPosition = 5
+       button.zPosition = 1
        button.position = CGPoint(x: x, y: y + cellWidth)
-       button.fillColor = SKColor.purple
+       button.fillColor = SKColor.orange
        let path = CGMutablePath()
        path.addLines(between: [
-            CGPoint(x: -cellWidth / 2 - 80, y: cellWidth / 2 - 190),
-            CGPoint(x: cellWidth / 2 - 100, y: cellWidth / 2 - 190),
-            CGPoint(x: cellWidth / 2 - 100, y: -cellWidth / 2 - 170),
-            CGPoint(x: -cellWidth / 2 - 80, y: -cellWidth / 2 - 170)
+            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 220),//top left
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 220),//top right
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),//bot right
+            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)//bot left
        ])
        button.path = path
         self.resetButton = button
@@ -102,6 +103,13 @@ class GameScene: SKScene {
         turnLabel.text = "\(whosTurn)'s Turn"
         turnLabel.fontColor = SKColor.red
         self.addChild(turnLabel)
+        
+        resetLabel = SKLabelNode(fontNamed: "ArialRoundMTBold")
+        resetLabel.zPosition = 2
+        resetLabel.position = CGPoint(x: 0, y: height / 2 - 592)
+        resetLabel.text = "Reset Game"
+        resetLabel.fontColor = SKColor.white
+        self.addChild(resetLabel)
         
         
     }
