@@ -90,5 +90,18 @@ class Board {
             playerTurn = .red
         }
     }
+    
+    
+    func resetBoard(){
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
+        }
+        self.updateDisplay()
+        playerTurn = .red
+    }
 
+    
+    
 }
