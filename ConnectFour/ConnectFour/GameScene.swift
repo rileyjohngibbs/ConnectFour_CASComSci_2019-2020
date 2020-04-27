@@ -12,8 +12,16 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var restartButton: SKLabelNode!
 
     override func didMove(to view: SKView) {
+        createRestartButton()
+        board = Board()
+        createBoard()
+    }
+    
+    private func restartGame() {
+        tearDownBoard()
         board = Board()
         createBoard()
     }
@@ -29,12 +37,24 @@ class GameScene: SKScene {
                         board.updateDisplay()
                     }
                 }
+                if restartButton == touchedNode {
+                    restartGame()
+                }
             }
         }
     }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+    
+    private func createRestartButton() {
+        restartButton = SKLabelNode(fontNamed: "ArialRoundedMTBold")
+        restartButton.text = "Restart Game"
+        restartButton.fontColor = SKColor.red
+        restartButton.zPosition = 2
+        restartButton.position = CGPoint(x: 0, y: -(frame.size.height / 2) + 100)
+        addChild(restartButton)
     }
     
     private func createBoard() {
@@ -69,6 +89,19 @@ class GameScene: SKScene {
             col.dropper = dropper
             x += cellWidth
             y = height / -2 + cellWidth / 2
+        }
+    }
+    
+    private func tearDownBoard() {
+        for col in board.columns {
+            if let dropper = col.dropper {
+                dropper.removeFromParent()
+            }
+            for cell in col.cells {
+                if let node = cell.node {
+                    node.removeFromParent()
+                }
+            }
         }
     }
 }
