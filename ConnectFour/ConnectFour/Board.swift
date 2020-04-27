@@ -62,7 +62,11 @@ class Board {
             let newColumn = Column(ofSize: NUM_ROWS)
             columns.append(newColumn)
         }
-        playerTurn = .red
+        playerTurn = Board.selectFirstPlayer()
+    }
+    
+    static func selectFirstPlayer() -> Chip {
+        return .red
     }
     
     func updateDisplay() {
@@ -88,6 +92,19 @@ class Board {
             playerTurn = .black
         } else if playerTurn == .black {
             playerTurn = .red
+        }
+    }
+    
+    func restartGame() {
+        clearBoard()
+        playerTurn = Board.selectFirstPlayer()
+    }
+    
+    func clearBoard() {
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
         }
     }
 
