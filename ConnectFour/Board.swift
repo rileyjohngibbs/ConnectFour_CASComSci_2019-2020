@@ -80,7 +80,7 @@ class Board {
             }
         }
         self.updateDisplay()
-        playerTurn = .red
+        playerTurn = .black
     }
     
     func dropChip(in column: Column) {
@@ -100,5 +100,5 @@ class Board {
             playerTurn = .red
         }
     }
-
+    
 }

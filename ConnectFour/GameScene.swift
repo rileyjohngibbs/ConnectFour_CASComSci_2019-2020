@@ -35,11 +35,11 @@ class GameScene: SKScene {
                         board.updateDisplay()
                     }
                     if let button = self.resetbutton, button == touchedNode {
-                    board.resetBoard()
+                        board.resetBoard()
+                    }
                 }
             }
         }
-    }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -79,20 +79,19 @@ class GameScene: SKScene {
             y = height / -2 + cellWidth / 2
         }
         let button = SKShapeNode()
-       button.zPosition = 1
-       button.position = CGPoint(x: x, y: y + cellWidth)
-       button.fillColor = SKColor.blue
-       let path = CGMutablePath()
-       path.addLines(between: [
+        button.zPosition = 1
+        button.position = CGPoint(x: x, y: y + cellWidth)
+        button.fillColor = SKColor.blue
+        let path = CGMutablePath()
+        path.addLines(between: [
             CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 230),
-            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 230),//top right
-            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),//bot right
-            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)//bot left
-       ])
-       button.path = path
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 230),
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)
+        ])
+        button.path = path
         self.resetbutton = button
-       addChild(button)
-
+        addChild(button)
+        
         playerTurnLabel = SKLabelNode(fontNamed: FONT)
         playerTurnLabel.zPosition = 1
         playerTurnLabel.position = CGPoint(x: 0, y: height / 2 + 170)
