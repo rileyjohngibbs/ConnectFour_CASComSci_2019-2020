@@ -48,6 +48,8 @@ class Board {
                 node.fillColor = color
             }
         }
+        
+        
     }
     
     let NUM_COLUMNS = 7
@@ -90,5 +92,16 @@ class Board {
             playerTurn = .red
         }
     }
+    
+     func resetGame(){
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
+        }
+        self.updateDisplay()
+        playerTurn = .red
+    }
+    }
+    
 
-}
