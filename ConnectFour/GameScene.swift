@@ -84,9 +84,9 @@ class GameScene: SKScene {
         button.fillColor = SKColor.blue
         let path = CGMutablePath()
         path.addLines(between: [
-            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 370),
-            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 370),
-            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 360),            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 360)
+            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 230),
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 230),
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)
         ])
         button.path = path
         self.resetbutton = button
@@ -101,7 +101,7 @@ class GameScene: SKScene {
         
         resetLabel = SKLabelNode(fontNamed: FONT)
         resetLabel.zPosition = 2
-        resetLabel.position = CGPoint(x: 0, y: height / 2 - 750)
+        resetLabel.position = CGPoint(x: 0, y: height / 2 - 592)
         resetLabel.text = "Clear Game"
         resetLabel.fontColor = SKColor.purple
         self.addChild(resetLabel)
