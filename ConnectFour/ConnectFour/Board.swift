@@ -49,13 +49,6 @@ class Board {
             }
         }
         
-        func empty(){
-            if let node = node {
-            node.fillColor = SKColor.yellow
-        
-            }
-        }
-        
         
     }
     
@@ -99,5 +92,16 @@ class Board {
             playerTurn = .red
         }
     }
+    
+     func resetGame(){
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
+        }
+        self.updateDisplay()
+        playerTurn = .red
+    }
+    }
+    
 
-}

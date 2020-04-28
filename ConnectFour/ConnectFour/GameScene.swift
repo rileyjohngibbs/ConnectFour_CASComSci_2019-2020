@@ -18,6 +18,8 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -26,8 +28,7 @@ class GameScene: SKScene {
             let touchedNodes = self.nodes(at: location)
             for node in touchedNodes{
                 if node.name == "play_button" {
-                    resetGame()
-                }
+                    board.resetGame()              }
             }
             for touchedNode in touchedNodes {
                 for column in self.board.columns {
@@ -96,23 +97,5 @@ class GameScene: SKScene {
         clearButton.path = path
         self.addChild(clearButton)
     }
-    
-    
-    
-    
-    func resetGame(){
-        let width: CGFloat = frame.size.width * 7 / 9
-              let cellWidth: CGFloat = width / CGFloat(board.NUM_COLUMNS)
-              let height = cellWidth * CGFloat(board.NUM_ROWS)
-              var x = width / -2 + cellWidth / 2
-              var y = height / -2 + cellWidth / 2
 
-        for col in board.columns {
-            
-            for cell in col.cells {
-                cell.empty()
-            
-}
-}
-}
 }
