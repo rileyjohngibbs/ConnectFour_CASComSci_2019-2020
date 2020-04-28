@@ -90,5 +90,14 @@ class Board {
             playerTurn = .red
         }
     }
+    
+    deinit {
+        for column in columns {
+            column.dropper?.removeFromParent()
+            for cell in column.cells {
+                cell.node?.removeFromParent()
+            }
+        }
+    }
 
 }
