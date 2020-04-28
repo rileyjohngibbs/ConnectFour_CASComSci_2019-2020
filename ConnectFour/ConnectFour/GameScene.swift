@@ -10,12 +10,15 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    var gameLogo: SKLabelNode!
+    var playButton: SKShapeNode!
     
     var board: Board!
 
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
+        initializeMenu()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -27,6 +30,13 @@ class GameScene: SKScene {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
                         board.updateDisplay()
+                        for node in touchedNodes {
+                            if node.name == "play_button" {
+                                board = Board()
+                                createBoard()
+                                playButton.position = CGPoint(x: 0, y: (frame.size.height * 40) + 200)
+                            }
+                        }
                     }
                 }
             }
@@ -71,4 +81,29 @@ class GameScene: SKScene {
             y = height / -2 + cellWidth / 2
         }
     }
+private func initializeMenu() {
+        gameLogo = SKLabelNode(fontNamed: "ArialRoundedMTBold")
+        gameLogo.zPosition = 1
+        gameLogo.position = CGPoint(x: 0, y: (frame.size.height / 2) - 200)
+        gameLogo.fontSize = 60
+        gameLogo.text = "CONNECT FOUR"
+        gameLogo.fontColor = SKColor.systemTeal
+        self.addChild(gameLogo)
+
+
+         playButton = SKShapeNode()
+        playButton.name = "play_button"
+        playButton.zPosition = 1
+        playButton.position = CGPoint(x: 0, y: (frame.size.height / -2) + 200)
+        playButton.fillColor = SKColor.blue
+        let topCorner = CGPoint(x: -50, y: 50)
+        let bottomCorner = CGPoint(x: -50, y: -50)
+        let middle = CGPoint(x: 50, y: 0)
+        let path = CGMutablePath()
+        path.addLine(to: topCorner)
+        path.addLines(between: [topCorner, bottomCorner, middle])
+        playButton.path = path
+        self.addChild(playButton)
+    }
+
 }
