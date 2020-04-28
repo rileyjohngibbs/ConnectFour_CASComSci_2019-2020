@@ -12,7 +12,13 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
-
+    var playerTurnLabel: SKLabelNode!
+    var playersTurn: String = "Red"
+    var resetbutton: SKShapeNode!
+    var resetLabel: SKLabelNode!
+    var FONT: String = "ArialRoundMTBold"
+    
+    
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
@@ -28,6 +34,9 @@ class GameScene: SKScene {
                         board.dropChip(in: column)
                         board.updateDisplay()
                     }
+                    if let button = self.resetbutton, button == touchedNode {
+                        board.resetBoard()
+                    }
                 }
             }
         }
@@ -36,7 +45,6 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
-    
     private func createBoard() {
         let width: CGFloat = frame.size.width * 7 / 9
         let cellWidth: CGFloat = width / CGFloat(board.NUM_COLUMNS)
@@ -70,5 +78,34 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        let button = SKShapeNode()
+        button.zPosition = 1
+        button.position = CGPoint(x: x, y: y + cellWidth)
+        button.fillColor = SKColor.blue
+        let path = CGMutablePath()
+        path.addLines(between: [
+            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 370),
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 370),
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 360),            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 360)
+        ])
+        button.path = path
+        self.resetbutton = button
+        addChild(button)
+        
+        playerTurnLabel = SKLabelNode(fontNamed: FONT)
+        playerTurnLabel.zPosition = 1
+        playerTurnLabel.position = CGPoint(x: 0, y: height / 2 + 170)
+        playerTurnLabel.position = CGPoint(x: 0, y: height / 2 + 170)
+        playerTurnLabel.text = "Player One's Turn"
+        self.addChild(playerTurnLabel)
+        
+        resetLabel = SKLabelNode(fontNamed: FONT)
+        resetLabel.zPosition = 2
+        resetLabel.position = CGPoint(x: 0, y: height / 2 - 750)
+        resetLabel.text = "Clear Game"
+        resetLabel.fontColor = SKColor.purple
+        self.addChild(resetLabel)
+        
+        
     }
 }
