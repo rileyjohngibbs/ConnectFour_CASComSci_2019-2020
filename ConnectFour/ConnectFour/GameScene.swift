@@ -17,7 +17,6 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         board = Board()
-        createBoard()
         initializeMenu()
     }
     
@@ -40,6 +39,7 @@ class GameScene: SKScene {
                     menuAnimation()
                      createBoard()
                      playButton.position = CGPoint(x: 0, y: (frame.size.height * 40) + 200)
+                         createBoard()
                  }
              }
         }
