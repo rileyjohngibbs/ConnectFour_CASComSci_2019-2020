@@ -73,6 +73,15 @@ class Board {
         }
     }
     
+    func resetGame(){
+        for column in columns {
+            for cell in column.cells {
+                cell.chip = .empty
+            }
+        }
+        self.updateDisplay()
+    }
+    
     func dropChip(in column: Column) {
         for cell in column.cells {
             if cell.chip == .empty {
@@ -92,3 +101,5 @@ class Board {
     }
 
 }
+
+    
