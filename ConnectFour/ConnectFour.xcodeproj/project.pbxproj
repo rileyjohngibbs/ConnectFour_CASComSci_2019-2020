@@ -293,13 +293,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6Q63YJWBWF;
+				DEVELOPMENT_TEAM = T6M4DKL2NY;
 				INFOPLIST_FILE = ConnectFour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rileyjohngibbs.ConnectFour;
+				PRODUCT_BUNDLE_IDENTIFIER = MatthewSilletti;
 				PRODUCT_NAME = "Connect Four";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -311,13 +311,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6Q63YJWBWF;
+				DEVELOPMENT_TEAM = T6M4DKL2NY;
 				INFOPLIST_FILE = ConnectFour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rileyjohngibbs.ConnectFour;
+				PRODUCT_BUNDLE_IDENTIFIER = MatthewSilletti;
 				PRODUCT_NAME = "Connect Four";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

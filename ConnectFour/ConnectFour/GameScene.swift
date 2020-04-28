@@ -13,6 +13,9 @@ class GameScene: SKScene {
     
     var board: Board!
     var turnLabel: SKLabelNode!
+    var turn: String = "Red"
+    var resetB: SKShapeNode!
+    var resetL: SKLabelNode!
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -28,6 +31,10 @@ class GameScene: SKScene {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
                         board.updateDisplay()
+                        updateTurnLabel()
+                    }
+                    if let button = self.resetB, button == touchedNode {
+                        board.resetBoard()
                     }
                 }
             }
@@ -71,11 +78,45 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        let button = SKShapeNode()
+        button.zPosition = 1
+        button.position = CGPoint(x: x, y: y + cellWidth)
+        button.fillColor = SKColor.purple
+        let path = CGMutablePath()
+        path.addLines(between: [
+            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 220),//tl
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 220),//tr
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),//br
+            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)//bl
+        ])
+        
+        button.path = path
+        self.resetB = button
+        addChild(button)
+        
         turnLabel = SKLabelNode(fontNamed: "ArialRoundedMTBold")
         turnLabel.zPosition = 1
         turnLabel.position = CGPoint(x: 0, y: (height / 2) + 200)
         turnLabel.text = "Red Player's Turn"
         turnLabel.fontColor = SKColor.purple
         addChild(turnLabel)
+        
+        resetL = SKLabelNode(fontNamed: "ArialRoundMTBold")
+        resetL.zPosition = 2
+        resetL.position = CGPoint(x: 0, y: height / 2 - 592)
+        resetL.text = "Reset Game"
+        resetL.fontColor = SKColor.white
+        self.addChild(resetL)
+    }
+    
+    func updateTurnLabel() {
+        if turn == "Red" {
+            turn = "Black"
+            turnLabel.fontColor = SKColor.white
+        } else if turn == "Black" {
+            turn = "Red"
+            turnLabel.fontColor = SKColor.red
+        }
+        turnLabel.text = "It is currently \(turn)'s turn!"
     }
 }
