@@ -48,6 +48,15 @@ class Board {
                 node.fillColor = color
             }
         }
+        
+        func empty(){
+            if let node = node {
+            node.fillColor = SKColor.yellow
+        
+            }
+        }
+        
+        
     }
     
     let NUM_COLUMNS = 7

@@ -12,6 +12,8 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var clearButton: SKShapeNode!
+    var count = 0
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -22,6 +24,11 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNodes = self.nodes(at: location)
+            for node in touchedNodes{
+                if node.name == "play_button" {
+                    resetGame()
+                }
+            }
             for touchedNode in touchedNodes {
                 for column in self.board.columns {
                     if let dropper = column.dropper, dropper == touchedNode {
@@ -70,5 +77,42 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        createButton()
     }
+    
+    
+    func createButton(){
+        clearButton = SKShapeNode()
+        clearButton.name = "play_button"
+        clearButton.zPosition = 1
+        clearButton.position = CGPoint(x: 0, y: (frame.size.height / -2) + 200)
+        clearButton.fillColor = SKColor.cyan
+        let topCorner = CGPoint(x: -50, y: 50)
+        let bottomCorner = CGPoint(x: -50, y: -50)
+        let middle = CGPoint(x: 50, y: 0)
+        let path = CGMutablePath()
+        path.addLine(to: topCorner)
+        path.addLines(between: [topCorner, bottomCorner, middle])
+        clearButton.path = path
+        self.addChild(clearButton)
+    }
+    
+    
+    
+    
+    func resetGame(){
+        let width: CGFloat = frame.size.width * 7 / 9
+              let cellWidth: CGFloat = width / CGFloat(board.NUM_COLUMNS)
+              let height = cellWidth * CGFloat(board.NUM_ROWS)
+              var x = width / -2 + cellWidth / 2
+              var y = height / -2 + cellWidth / 2
+
+        for col in board.columns {
+            
+            for cell in col.cells {
+                cell.empty()
+            
+}
+}
+}
 }
