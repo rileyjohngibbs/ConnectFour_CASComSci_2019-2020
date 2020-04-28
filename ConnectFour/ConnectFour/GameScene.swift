@@ -12,10 +12,12 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var restartButton: SKLabelNode!
 
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
+        addRestartButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -26,6 +28,10 @@ class GameScene: SKScene {
                 for column in self.board.columns {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
+                        board.updateDisplay()
+                    }
+                    if restartButton == touchedNode {
+                        board.restartGame()
                         board.updateDisplay()
                     }
                 }
@@ -70,5 +76,14 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+    }
+    
+    private func addRestartButton() {
+        restartButton = SKLabelNode(fontNamed: "ArialRoundedMTBold")
+        restartButton.fontColor = SKColor.red
+        restartButton.text = "Restart Game"
+        restartButton.zPosition = 2
+        restartButton.position = CGPoint(x: 0, y: -frame.size.height / 2 + 100)
+        addChild(restartButton)
     }
 }
