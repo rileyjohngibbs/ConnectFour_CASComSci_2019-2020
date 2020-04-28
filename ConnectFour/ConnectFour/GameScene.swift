@@ -45,7 +45,7 @@ class GameScene: SKScene {
         var y = height / -2 + cellWidth / 2
         for col in board.columns {
             for cell in col.cells {
-                let node = SKShapeNode(rectOf: CGSize(width: cellWidth, height: cellWidth))
+                let node = SKShapeNode(circleOfRadius: 40)
                 node.zPosition = 2
                 node.position = CGPoint(x: x, y: y)
                 node.strokeColor = SKColor.black
