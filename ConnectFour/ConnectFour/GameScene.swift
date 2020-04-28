@@ -12,6 +12,9 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var resetButton: SKShapeNode!
+    var resetLabel: SKLabelNode!
+    var arial: String = "ArialRoundMTBold"
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -27,6 +30,9 @@ class GameScene: SKScene {
                     if let dropper = column.dropper, dropper == touchedNode {
                         board.dropChip(in: column)
                         board.updateDisplay()
+                    }
+                    if let button = self.resetButton, button == touchedNode {
+                        board.resetGame()
                     }
                 }
             }
@@ -70,5 +76,26 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+    let button = SKShapeNode()
+        button.zPosition = 1
+        button.position = CGPoint(x: x, y: y + cellWidth)
+        button.fillColor = SKColor.green
+        let path = CGMutablePath()
+        path.addLines(between: [
+            CGPoint(x: -cellWidth / 2 - 410, y: cellWidth / 2 - 210),
+            CGPoint(x: cellWidth / 2 - 260, y: cellWidth / 2 - 210),
+            CGPoint(x: cellWidth / 2 - 260, y: -cellWidth / 2 - 200),
+            CGPoint(x: -cellWidth / 2 - 410, y: -cellWidth / 2 - 200)
+        ])
+        button.path = path
+        self.resetButton = button
+        addChild(button)
+        
+        resetLabel = SKLabelNode(fontNamed: arial)
+        resetLabel.zPosition = 2
+        resetLabel.position = CGPoint(x: 0, y: height / 2 - 592)
+        resetLabel.text = "Reset Game"
+        resetLabel.fontColor = SKColor.black
+        self.addChild(resetLabel)
     }
 }
