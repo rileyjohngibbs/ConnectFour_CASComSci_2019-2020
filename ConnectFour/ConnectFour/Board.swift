@@ -73,6 +73,16 @@ class Board {
         }
     }
     
+    func reset() {
+        for col in columns {
+            for cell in col.cells {
+                cell.chip = .empty
+            }
+        }
+        updateDisplay()
+    }
+    
+    
     func dropChip(in column: Column) {
         for cell in column.cells {
             if cell.chip == .empty {
