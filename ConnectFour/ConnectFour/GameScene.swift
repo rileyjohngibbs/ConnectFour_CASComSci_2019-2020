@@ -12,7 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
-
+    
     override func didMove(to view: SKView) {
         board = Board()
         createBoard()
@@ -43,9 +43,13 @@ class GameScene: SKScene {
         let height = cellWidth * CGFloat(board.NUM_ROWS)
         var x = width / -2 + cellWidth / 2
         var y = height / -2 + cellWidth / 2
+//        let bgRect = CGRect(x: width, y: height, width: x, height: y)
+//        let background = SKShapeNode(rect: bgRect)
+//        background.fillColor = SKColor.yellow
+//        addChild(background)
         for col in board.columns {
             for cell in col.cells {
-                let node = SKShapeNode(circleOfRadius: 40)
+                let node = SKShapeNode(circleOfRadius: cellWidth / 2)
                 node.zPosition = 2
                 node.position = CGPoint(x: x, y: y)
                 node.strokeColor = SKColor.black
