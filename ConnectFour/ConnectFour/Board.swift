@@ -52,6 +52,7 @@ class Board {
     
     let NUM_COLUMNS = 7
     let NUM_ROWS = 6
+    var currentCell: Cell?
     
     var columns: [Column]
     var playerTurn: Chip
@@ -76,11 +77,19 @@ class Board {
     func dropChip(in column: Column) {
         for cell in column.cells {
             if cell.chip == .empty {
+                currentCell = cell
                 cell.chip = playerTurn
                 passTurn()
                 break
             }
         }
+    }
+    
+    func removeChip(cell:Cell) {
+        cell.chip = .empty
+        updateDisplay()
+        passTurn()
+        
     }
     
     func passTurn() {

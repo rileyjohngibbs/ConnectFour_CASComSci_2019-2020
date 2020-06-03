@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     var board: Board!
+    var undoButton: SKLabelNode!
 
     override func didMove(to view: SKView) {
         board = Board()
@@ -28,6 +29,9 @@ class GameScene: SKScene {
                         board.dropChip(in: column)
                         board.updateDisplay()
                     }
+                }
+                if touchedNode == undoButton, let cell = board.currentCell {
+                    board.removeChip(cell: cell)
                 }
             }
         }
@@ -70,5 +74,10 @@ class GameScene: SKScene {
             x += cellWidth
             y = height / -2 + cellWidth / 2
         }
+        undoButton = SKLabelNode(fontNamed: "AmericanTypewriter-Bold")
+        undoButton.text = "UNDO"
+        undoButton.fontColor = UIColor.white
+        undoButton.position = CGPoint(x: 0, y: -(frame.size.height / 2) + 50)
+        addChild(undoButton)
     }
 }
